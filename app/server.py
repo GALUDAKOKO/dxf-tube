@@ -12,7 +12,13 @@ browser as a download. Nothing is stored on disk.
 """
 import io
 import os
+import sys
 import tempfile
+
+# Ensure app/ directory is in path (needed when running from project root on Render)
+_here = os.path.dirname(os.path.abspath(__file__))
+if _here not in sys.path:
+    sys.path.insert(0, _here)
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import HTMLResponse, StreamingResponse, JSONResponse
